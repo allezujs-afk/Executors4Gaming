@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executors Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.5;
+        }
+
+        /* PASEK ZAKŁADEK NA GÓRZE */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 5px;
+        }
+
+        /* Przyciski zakładek na górze */
+        .tab-btn {
+            background-color: transparent;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 0;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Treść zakładek */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* STYLIZACJA TEKSTU DLA ZAKŁADKI GENERAL */
+        #general {
+            max-width: 800px;
+        }
+
+        #general h1 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+
+        #general h2 {
+            font-size: 15px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        #general h3 {
+            font-size: 13px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        #general p {
+            font-size: 13px;
+            margin: 0 0 10px 0;
+            color: #222;
+        }
+
+        #general ul {
+            margin: 0 0 15px 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        #general li {
+            margin-bottom: 5px;
+        }
+
+        /* ZAKŁADKI Z WYŚRODKOWANYM NAPISEM SOON */
+        #fivem-content,
+        #gmod-content {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        #fivem-content h1,
+        #gmod-content h1 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin: 0;
+            border: none;
+        }
+
+        /* POJEDYNCZY WIERSZ POBIERANIA */
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+            max-width: 500px;
+        }
+
+        .download-item h3 {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Przycisk Download - same czarne kreski, kwadratowy */
+        .btn-download {
+            background-color: transparent;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 0;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .btn-download:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRZYCISKI ZAKŁADEK -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'general')">General</button>
+        <button class="tab-btn" onclick="openTab(event, 'download')">Download</button>
+        <button class="tab-btn" onclick="openTab(event, 'fivem')">FiveM</button>
+        <button class="tab-btn" onclick="openTab(event, 'gmod')">Garry's Mod</button>
+    </div>
+
+    <!-- ZAKŁADKA 1: GENERAL -->
+    <div id="general" class="tab-content active">
+        <h1>Welcome to the Premier Roblox & FiveM Scripting, Executoring & Modding Network</h1>
+        
+        <p>Welcome to the ultimate digital sanctuary for power users, script developers, and modding enthusiasts across the Roblox and FiveM ecosystems. Our platform was engineered from the ground up to serve as a comprehensive, central hub where gamers can access cutting-edge execution software, high-performance Lua scripts, step-by-step technical documentation, and real-time security advisories.</p>
+        
+        <p>Whether your goal is to automate repetitive gameplay loops, explore hidden game mechanics, spawn fully customized vehicles, or alter in-game economic balances, our resource library delivers the tools and technical know-how to give you total control over your virtual environment.</p>
+
+        <h2>Core Offerings & Platform Features</h2>
+        <p>Our library is continuously curated and updated to ensure high execution rates, system stability, and maximum compatibility with the latest game builds.</p>
+        
+        <ul>
+            <li><strong>High-Level Roblox & FiveM Executors:</strong> Direct access to top-tier, low-level injectors designed to execute complex, multi-threaded Lua scripts without causing client crashes or memory leaks.</li>
+            <li><strong>Extensive Script & Mod Menu Repository:</strong> An expansive directory featuring money generators, inventory editors, vehicle spawners, player modifications, admin menus, ESP/visual overlays, and automated farming utilities.</li>
+            <li><strong>Comprehensive Technical Guides:</strong> Detailed tutorials covering software setup, DLL injection methods, bypass configurations, dependency installations, and troubleshooting common execution errors.</li>
+            <li><strong>Anti-Cheat Detection Tracking:</strong> Real-time analysis of active anti-cheat systems (such as Roblox’s Byfron/Hyperion and FiveM’s FiveGuard or Phoenix) to help you understand which triggers are monitored.</li>
+            <li><strong>Active Community Forum & Support:</strong> Connect with script writers, share custom code snippets, request custom features, and troubleshoot technical issues with experienced modders.</li>
+        </ul>
+
+        <h2>In-Depth Breakdown: How Executors Work</h2>
+        <p>An executor (frequently referred to as an injector, script engine, or mod menu) is a specialized software utility that hooks directly into a game's active process memory. By establishing a bridge between external code and the client’s internal Lua runtime environment, an executor allows players to inject custom commands and scripts that overwrite standard game logic.</p>
+
+        <h3>Roblox Executoring & Exploiting</h3>
+        <p>In Roblox, game logic is governed by Lua scripts executing on the client and server. Client-sided executors hook into the Roblox client process, bypassing standard execution permissions. This grants players the ability to run custom client scripts that can manipulate player parameters, render custom UI interfaces, or automate complex in-game activities.</p>
+        
+        <ul>
+            <li><strong>Automated Farming:</strong> Run scripts that automatically perform tasks, harvest resources, or complete quests 24/7 without manual input.</li>
+            <li><strong>Visual & Combat Modifiers:</strong> Enable wallhacks (ESP), hitboxes, aimbots, infinite jump, and custom movement speeds across various Roblox titles.</li>
+            <li><strong>Economy & Inventory Tweaks:</strong> Interact with vulnerable remote events to claim rewards, modify local currency counters, or unlock locked cosmetics.</li>
+        </ul>
+
+        <h3>FiveM Scripting & Server Exploitation</h3>
+        <p>FiveM operates on dedicated custom servers running various frameworks such as ESX, QBCore, or VRP. Because many server functions rely on client-to-server event triggers, specialized FiveM executors and mod menus allow users to trigger these events manually.</p>
+        
+        <ul>
+            <li><strong>Currency & Account Manipulation:</strong> Execute server-event triggers designed to deposit funds into your bank account, generate cash directly into your wallet, or duplicate high-value inventory items on unprotected or poorly coded servers.</li>
+            <li><strong>Entity & Vehicle Generation:</strong> Instantly spawn any vanilla or custom add-on vehicle, aircraft, or object directly in front of your character, complete with full engine tuning, bulletproof armor, and custom cosmetics.</li>
+            <li><strong>Admin & Trolling Menus:</strong> Utilize master control overlays to activate godmode, teleport anywhere on the map, manipulate weather and time, heal instantly during firefights, or apply custom animations.</li>
+        </ul>
+
+        <h2>Anti-Cheat Systems, Ban Risks & Safety Advisory</h2>
+        <p>While executors open up incredible custom possibilities, utilizing unauthorized software in multiplayer environments carries inherent risks. Both Roblox Corporation and FiveM server owners employ multi-layered security measures designed to detect client modifications and block unauthorized script execution.</p>
+    </div>
+
+    <!-- ZAKŁADKA 2: DOWNLOAD -->
+    <div id="download" class="tab-content">
+        
+        <div class="download-item">
+            <h3>Executor #1 JJsploit</h3>
+            <a href="https://wearedevs.net/d/JJSploit" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #2 Solara</h3>
+            <a href="https://wearedevs.net/e/Solara" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #3 Delta</h3>
+            <a href="https://wearedevs.net/d/Delta" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #4 Xeno</h3>
+            <a href="https://wearedevs.net/d/Xeno" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #5 Potassium (paid)</h3>
+            <a href="https://www.potassium.pro/" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #6 Volcano</h3>
+            <a href="https://volcano.wtf/" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #7 Pluto</h3>
+            <a href="https://wearedevs.net/d/Pluto" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #8 Fluxus Z (External)</h3>
+            <a href="https://wearedevs.net/d/Fluxus%20Z" target="_blank" class="btn-download">Download</a>
+        </div>
+
+        <div class="download-item">
+            <h3>Executor #9 Nexomia</h3>
+            <a href="https://nexomia.net/" target="_blank" class="btn-download">Download</a>
+        </div>
+
+    </div>
+
+    <!-- ZAKŁADKA 3: FIVEM -->
+    <div id="fivem" class="tab-content">
+        <div id="fivem-content">
+            <h1>SOON</h1>
+        </div>
+    </div>
+
+    <!-- ZAKŁADKA 4: GARRY'S MOD -->
+    <div id="gmod" class="tab-content">
+        <div id="gmod-content">
+            <h1>SOON</h1>
+        </div>
+    </div>
+
+    <!-- SKRYPT DO KLIKANIA W ZAKŁADKI -->
+    <script>
+        function openTab(evt, tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
