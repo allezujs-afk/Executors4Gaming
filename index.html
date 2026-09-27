@@ -179,7 +179,7 @@
         }
 
         /* PRZYCISKI */
-        .tab-btn, .theme-btn, .btn-download {
+        .tab-btn, .theme-btn, .btn-download, .btn-auth-submit {
             background-color: transparent;
             color: var(--text-color);
             border: 1px solid var(--border-color);
@@ -197,9 +197,10 @@
             color: var(--bg-color);
         }
 
-        .btn-download:hover, .theme-btn:hover, .tab-btn:hover {
+        .btn-download:hover, .theme-btn:hover, .tab-btn:hover, .btn-auth-submit:hover {
             background-color: var(--text-color);
             color: var(--bg-color);
+            opacity: 0.9;
         }
 
         /* TREŚĆ ZAKŁADEK */
@@ -297,21 +298,7 @@
             background-color: transparent;
             color: var(--text-color);
             box-sizing: border-box;
-        }
-
-        .btn-auth-submit {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-        }
-
-        .btn-auth-submit:hover {
-            opacity: 0.9;
+            font-family: inherit;
         }
 
         .toggle-auth-btn {
@@ -341,8 +328,8 @@
             margin: 40px auto;
         }
 
-        /* STYLI DLA CHANGELOG */
-        .changelog-container {
+        /* STYLI DLA CHANGELOG I UPDATES */
+        .changelog-container, .updates-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -565,7 +552,7 @@
                     <path fill="#FFFFFF" d="M16 6a10 10 0 1 0 10 10A10.011 10.011 0 0 0 16 6zm0 16a6 6 0 1 1 6-6 6.007 6.007 0 0 1-6 6z"/>
                 </svg>
                 <span class="recaptcha-brand">reCAPTCHA</span>
-                <span class="recaptcha-footer"><a href="#">Privacy</a> - <a href="#">Terms</a></span>
+                <span class="recaptcha-footer"><a href="#">Privacy</a> <a href="#">Terms</a></span>
             </div>
         </div>
     </div>
@@ -574,9 +561,10 @@
     <div class="top-bar">
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'general')">General</button>
-            <button class="tab-btn" onclick="openTab(event, 'download')">Download</button>
-            <button class="tab-btn" onclick="openTab(event, 'robloxoptimizer')">RobloxOptimizer</button>
+            <button class="tab-btn" onclick="openTab(event, 'download')">Executors</button>
+            <button class="tab-btn" onclick="openTab(event, 'robloxoptimizer')">Roblox Optimizer</button>
             <button class="tab-btn" onclick="openTab(event, 'fivem')">FiveM</button>
+            <button class="tab-btn" onclick="openTab(event, 'updates')">Planned Updates</button>
             <button class="tab-btn" onclick="openTab(event, 'changelog')">Changelog</button>
             <button class="tab-btn" onclick="openTab(event, 'account')">Account</button>
         </div>
@@ -705,7 +693,6 @@
     <div id="robloxoptimizer" class="tab-content">
         <div class="download-item">
             <h3>Roblox Optimizer & FPS Boost Tool</h3>
-            <!-- TUTAJ WRZUĆ SWÓJ LINK DO POBIERANIA W MIEJSCE '#' LUB BEZPOŚREDNI LINK DO PLIKU -->
             <a href="https://mega.nz/file/HbQljS5D#PxJfX78w2rmPBS-9nP4LsjLZsDwBR0Eo7BjZ66mGBH8" target="_blank" class="btn-download" onclick="handleDownload(event, this.href)">Download</a>
         </div>
     </div>
@@ -717,7 +704,21 @@
         </div>
     </div>
 
-    <!-- ZAKŁADKA 5: CHANGELOG -->
+    <!-- ZAKŁADKA 5: UPDATES (TUTAJ DODAJESZ NOWE UPDATY W KODZIE) -->
+    <div id="updates" class="tab-content">
+        <div class="changelog-container">
+            <div class="changelog-entry">
+                <div class="changelog-header">
+                    <span class="changelog-date">Planned Updates</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>05.10.2026 | [Fully recoding Website.]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ZAKŁADKA 6: CHANGELOG -->
     <div id="changelog" class="tab-content">
         <div class="changelog-container">
             <div class="changelog-entry">
@@ -734,7 +735,7 @@
         </div>
     </div>
 
-    <!-- ZAKŁADKA 6: KONTO / LOGOWANIE -->
+    <!-- ZAKŁADKA 7: KONTO / LOGOWANIE -->
     <div id="account" class="tab-content">
         <!-- Formularz widoczny dla niezalogowanych -->
         <div class="auth-container" id="auth-box">
@@ -779,7 +780,7 @@
     <!-- SKRYPTY JAVASCRIPT -->
     <script>
         // KONFIGURACJA SUPABASE
-        const SUPABASE_URL = 'https://TWOJ-PROJEKT.supabase.co'; // Podmień na swój adres Supabase jeśli jeszcze tego nie zrobiłeś
+        const SUPABASE_URL = 'https://TWOJ-PROJEKT.supabase.co'; 
         const SUPABASE_KEY = 'sb_publishable_BpccY-c4QQmNJiN3iPD2Ug_YCTw-MQU';
 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -871,29 +872,29 @@
             event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const messageEl = document.getElementById('auth-message');
+            const msgEl = document.getElementById('auth-message');
 
-            messageEl.style.color = 'var(--text-color)';
-            messageEl.textContent = 'Loading...';
+            msgEl.style.color = 'var(--text-color)';
+            msgEl.textContent = 'Przetwarzanie...';
 
             if (isLogin) {
                 const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
                 if (error) {
-                    messageEl.style.color = '#ff4d4d';
-                    messageEl.textContent = 'Error: ' + error.message;
+                    msgEl.style.color = 'red';
+                    msgEl.textContent = error.message;
                 } else {
-                    messageEl.style.color = '#00ff66';
-                    messageEl.textContent = 'Logged in successfully!';
+                    msgEl.style.color = 'green';
+                    msgEl.textContent = 'Zalogowano pomyślnie!';
                     updateUserUI(data.user);
                 }
             } else {
                 const { data, error } = await _supabase.auth.signUp({ email, password });
                 if (error) {
-                    messageEl.style.color = '#ff4d4d';
-                    messageEl.textContent = 'Error: ' + error.message;
+                    msgEl.style.color = 'red';
+                    msgEl.textContent = error.message;
                 } else {
-                    messageEl.style.color = '#00ff66';
-                    messageEl.textContent = 'Registration successful! Check your email to confirm.';
+                    msgEl.style.color = 'green';
+                    msgEl.textContent = 'Konto utworzone! Sprawdź email lub zaloguj się.';
                 }
             }
         }
@@ -906,19 +907,18 @@
         function updateUserUI(user) {
             const authBox = document.getElementById('auth-box');
             const userBox = document.getElementById('user-box');
-            const userEmailDisplay = document.getElementById('user-email-display');
+            const emailDisplay = document.getElementById('user-email-display');
 
             if (user) {
                 authBox.style.display = 'none';
                 userBox.style.display = 'block';
-                userEmailDisplay.textContent = user.email;
+                emailDisplay.textContent = user.email;
             } else {
                 authBox.style.display = 'block';
                 userBox.style.display = 'none';
-                userEmailDisplay.textContent = '';
+                emailDisplay.textContent = '';
             }
         }
     </script>
-
 </body>
 </html>
