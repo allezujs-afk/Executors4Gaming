@@ -397,7 +397,7 @@
             border: none;
         }
 
-        /* ZAKŁADKA DOWNLOAD */
+        /* ZAKŁADKA DOWNLOAD / ROBLOX OPTIMIZER */
         .download-item {
             display: flex;
             justify-content: space-between;
@@ -575,6 +575,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'general')">General</button>
             <button class="tab-btn" onclick="openTab(event, 'download')">Download</button>
+            <button class="tab-btn" onclick="openTab(event, 'robloxoptimizer')">RobloxOptimizer</button>
             <button class="tab-btn" onclick="openTab(event, 'fivem')">FiveM</button>
             <button class="tab-btn" onclick="openTab(event, 'changelog')">Changelog</button>
             <button class="tab-btn" onclick="openTab(event, 'account')">Account</button>
@@ -700,37 +701,46 @@
         </div>
     </div>
 
-    <!-- ZAKŁADKA 3: FIVEM -->
+    <!-- ZAKŁADKA 3: ROBLOX OPTIMIZER -->
+    <div id="robloxoptimizer" class="tab-content">
+        <div class="download-item">
+            <h3>Roblox Optimizer & FPS Boost Tool</h3>
+            <!-- TUTAJ WRZUĆ SWÓJ LINK DO POBIERANIA W MIEJSCE '#' LUB BEZPOŚREDNI LINK DO PLIKU -->
+            <a href="https://mega.nz/file/HbQljS5D#PxJfX78w2rmPBS-9nP4LsjLZsDwBR0Eo7BjZ66mGBH8" target="_blank" class="btn-download" onclick="handleDownload(event, this.href)">Download</a>
+        </div>
+    </div>
+
+    <!-- ZAKŁADKA 4: FIVEM -->
     <div id="fivem" class="tab-content">
         <div id="fivem-content">
             <h1>SOON</h1>
         </div>
     </div>
 
-    <!-- ZAKŁADKA 4: CHANGELOG -->
+    <!-- ZAKŁADKA 5: CHANGELOG -->
     <div id="changelog" class="tab-content">
         <div class="changelog-container">
             <div class="changelog-entry">
                 <div class="changelog-header">
-                    <span class="changelog-version">v1.1</span>
+                    <span class="changelog-version">v1.2</span>
                     <span class="changelog-date">Made by zeviix</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>26.09.2026 | website Created.</li>
-                    <li>27.09.2026 | Updated website and added new features like reCAPTCHA and switch to change website theme to dark.</li>
+                    <li>26.09.2026 | Website created.</li>
+                    <li>27.09.2026 | Updated website and added new features like reCAPTCHA, dark mode, and RobloxOptimizer tab.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- ZAKŁADKA 5: KONTO / LOGOWANIE -->
+    <!-- ZAKŁADKA 6: KONTO / LOGOWANIE -->
     <div id="account" class="tab-content">
         <!-- Formularz widoczny dla niezalogowanych -->
         <div class="auth-container" id="auth-box">
             <h2 id="auth-title">Login</h2>
             <form id="auth-form" onsubmit="handleAuth(event)">
                 <div class="input-group">
-                    <label for="email">email</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="username" autocomplete="username" required>
                 </div>
                 
@@ -767,8 +777,8 @@
 
     <!-- SKRYPTY JAVASCRIPT -->
     <script>
-        // KONFIGURACJA SUPABASE (Twój klucz jest już wklejony!)
-        const SUPABASE_URL = 'https://TWOJ-PROJEKT.supabase.co'; // PODMIEŃ TYLKO TEN ADRES z panelu Supabase!
+        // KONFIGURACJA SUPABASE
+        const SUPABASE_URL = 'https://TWOJ-PROJEKT.supabase.co'; // Podmień na swój adres Supabase jeśli jeszcze tego nie zrobiłeś
         const SUPABASE_KEY = 'sb_publishable_BpccY-c4QQmNJiN3iPD2Ug_YCTw-MQU';
 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -848,11 +858,11 @@
         // LOGIKA LOGOWANIA I REJESTRACJI
         function toggleAuthMode() {
             isLogin = !isLogin;
-            document.getElementById('auth-title').textContent = isLogin ? 'Zaloguj się' : 'Zarejestruj się';
-            document.getElementById('auth-submit-btn').textContent = isLogin ? 'Zaloguj' : 'Zarejestruj';
+            document.getElementById('auth-title').textContent = isLogin ? 'Login' : 'Register';
+            document.getElementById('auth-submit-btn').textContent = isLogin ? 'Login' : 'Register';
             document.getElementById('auth-toggle-btn').textContent = isLogin 
-                ? 'Nie masz konta? Zarejestruj się' 
-                : 'Masz już konto? Zaloguj się';
+                ? "Don't Have Account? Register Here" 
+                : 'Already Have Account? Login Here';
             document.getElementById('auth-message').textContent = '';
         }
 
@@ -863,26 +873,26 @@
             const messageEl = document.getElementById('auth-message');
 
             messageEl.style.color = 'var(--text-color)';
-            messageEl.textContent = 'Ładowanie...';
+            messageEl.textContent = 'Loading...';
 
             if (isLogin) {
                 const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
                 if (error) {
                     messageEl.style.color = '#ff4d4d';
-                    messageEl.textContent = 'Błąd: ' + error.message;
+                    messageEl.textContent = 'Error: ' + error.message;
                 } else {
                     messageEl.style.color = '#00ff66';
-                    messageEl.textContent = 'Zalogowano pomyślnie!';
+                    messageEl.textContent = 'Logged in successfully!';
                     updateUserUI(data.user);
                 }
             } else {
                 const { data, error } = await _supabase.auth.signUp({ email, password });
                 if (error) {
                     messageEl.style.color = '#ff4d4d';
-                    messageEl.textContent = 'Błąd: ' + error.message;
+                    messageEl.textContent = 'Error: ' + error.message;
                 } else {
                     messageEl.style.color = '#00ff66';
-                    messageEl.textContent = 'Konto utworzone! Sprawdź e-mail, aby potwierdzić rejestrację.';
+                    messageEl.textContent = 'Registration successful! Check your email to confirm.';
                 }
             }
         }
@@ -904,6 +914,7 @@
             } else {
                 authBox.style.display = 'block';
                 userBox.style.display = 'none';
+                userEmailDisplay.textContent = '';
             }
         }
     </script>
